@@ -48,49 +48,42 @@ require_relative "rubocop/cop/design_system/no_raw_svg_in_components"
 require_relative "rubocop/cop/design_system/lookbook_only_glass_morph"
 require_relative "rubocop/cop/design_system/interactive_aria_required"
 
-# === ProspectsRadar Cops ===
+# === Architecture Cops ===
 
 # Service Layer
-require_relative "rubocop/cop/prospects_radar/service_inheritance"
-require_relative "rubocop/cop/prospects_radar/no_current_user_parameter"
-require_relative "rubocop/cop/prospects_radar/service_action_dispatch"
-require_relative "rubocop/cop/prospects_radar/service_response_format"
+require_relative "rubocop/cop/architecture/service_inheritance"
+require_relative "rubocop/cop/architecture/no_current_user_parameter"
+require_relative "rubocop/cop/architecture/service_action_dispatch"
+require_relative "rubocop/cop/architecture/service_response_format"
+require_relative "rubocop/cop/architecture/service_rescue_from"
+require_relative "rubocop/cop/architecture/controller_service_result_check"
 
 # Controller Layer
-require_relative "rubocop/cop/prospects_radar/controller_business_logic"
-require_relative "rubocop/cop/prospects_radar/no_controller_authorization"
+require_relative "rubocop/cop/architecture/controller_business_logic"
+require_relative "rubocop/cop/architecture/no_controller_authorization"
 
 # I18n
-require_relative "rubocop/cop/prospects_radar/i18n_no_default"
+require_relative "rubocop/cop/architecture/i18n_no_default"
 
-# AI/RAAF Layer
-require_relative "rubocop/cop/prospects_radar/raaf_agent_run"
-require_relative "rubocop/cop/prospects_radar/raaf_prompt_methods"
-require_relative "rubocop/cop/prospects_radar/raaf_agent_inheritance"
-require_relative "rubocop/cop/prospects_radar/raaf_agent_tool_scope"
-require_relative "rubocop/cop/prospects_radar/raaf_agent_no_inline_orchestration"
-require_relative "rubocop/cop/prospects_radar/schema_nested_array_required"
-require_relative "rubocop/cop/prospects_radar/prompt_language_instructions"
-require_relative "rubocop/cop/prospects_radar/raaf_logger"
+# === RAAF Cops (AI Agent Framework) ===
+require_relative "rubocop/cop/raaf/agent_run"
+require_relative "rubocop/cop/raaf/prompt_methods"
+require_relative "rubocop/cop/raaf/agent_inheritance"
+require_relative "rubocop/cop/raaf/agent_tool_scope"
+require_relative "rubocop/cop/raaf/agent_no_inline_orchestration"
+require_relative "rubocop/cop/raaf/schema_nested_array_required"
+require_relative "rubocop/cop/raaf/prompt_language_instructions"
+require_relative "rubocop/cop/raaf/logger"
+require_relative "rubocop/cop/raaf/prompt_user_input_escaping"
+require_relative "rubocop/cop/raaf/agent_schema_validation"
+require_relative "rubocop/cop/raaf/agent_context_immutability"
 
-# Testing - Cucumber
-require_relative "rubocop/cop/prospects_radar/no_sleep_in_cucumber"
-require_relative "rubocop/cop/prospects_radar/cucumber_prefer_test_id"
+# === MultiTenancy Cops ===
+require_relative "rubocop/cop/multi_tenancy/tenant_scope_required"
 
-# Data Access
-require_relative "rubocop/cop/prospects_radar/prefer_symbol_json_access"
-
-# Tenant Safety
-require_relative "rubocop/cop/prospects_radar/tenant_scope_required"
-
-# Service Error Handling
-require_relative "rubocop/cop/prospects_radar/service_rescue_from"
-require_relative "rubocop/cop/prospects_radar/controller_service_result_check"
-
-# AI Agent Safety
-require_relative "rubocop/cop/prospects_radar/prompt_user_input_escaping"
-require_relative "rubocop/cop/prospects_radar/agent_schema_validation"
-require_relative "rubocop/cop/prospects_radar/agent_context_immutability"
+# === Convention Cops ===
+require_relative "rubocop/cop/convention/prefer_symbol_json_access"
+# require_relative "rubocop/cop/convention/frozen_string_literal" # Use Style/FrozenStringLiteralComment instead
 
 # === RSpec Cops ===
 require_relative "rubocop/cop/rspec/prefer_build_stubbed_for_non_persisted"
@@ -109,6 +102,5 @@ require_relative "rubocop/cop/cucumber/consistent_wait_timeout"
 require_relative "rubocop/cop/cucumber/prefer_have_over_has_css"
 require_relative "rubocop/cop/cucumber/prefer_atomic_steps"
 require_relative "rubocop/cop/cucumber/no_silent_database_rescue"
-
-# Disabled cops
-# require_relative "rubocop/cop/prospects_radar/frozen_string_literal" # Use Style/FrozenStringLiteralComment instead
+require_relative "rubocop/cop/cucumber/prefer_test_id"
+require_relative "rubocop/cop/cucumber/no_sleep_in_cucumber"

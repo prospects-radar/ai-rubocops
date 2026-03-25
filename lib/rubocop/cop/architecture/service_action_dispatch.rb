@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module Architecture
       # Enforces meta-programming action dispatch pattern (DEC-031).
       # Services should NOT define call method with case/when dispatch.
       # BaseService handles dispatch automatically.

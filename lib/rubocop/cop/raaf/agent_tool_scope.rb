@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module RAAF
       # Enforces that agents instantiate tools via `build_tool` instead of
       # calling `Tool.new` directly, ensuring scoped tool enforcement.
       #
@@ -31,7 +31,7 @@ module RuboCop
       #     end
       #   end
       #
-      class RaafAgentToolScope < Base
+      class AgentToolScope < Base
         MSG = "Use `build_tool(%<tool>s)` instead of `%<tool>s.new` " \
               "to enforce scoped tool access in agents."
 

@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module RAAF
       # Prefers RAAF.logger over Rails.logger in AI code
       #
       # @example
@@ -12,7 +12,7 @@ module RuboCop
       #   # good
       #   RAAF.logger.info "Processing"
       #
-      class RaafLogger < Base
+      class Logger < Base
         extend AutoCorrector
 
         MSG = "Use `RAAF.logger` instead of `Rails.logger` in AI code for RAAF-specific logging features"

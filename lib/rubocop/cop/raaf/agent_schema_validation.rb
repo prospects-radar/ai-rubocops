@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module RAAF
       # Enforces that agents declaring a schema also validate their output against it.
       #
       # When an agent defines a schema (via def schema or schema method), the output

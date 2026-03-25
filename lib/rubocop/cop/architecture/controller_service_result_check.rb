@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module Architecture
       # Enforces that controllers check service result success before rendering.
       #
       # When a controller calls a service and then renders or redirects, it must

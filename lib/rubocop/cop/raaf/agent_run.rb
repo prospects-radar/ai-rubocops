@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module RAAF
       # Enforces .run for RAAF agents, not .call (DEC-016, DEC-018, DEC-019, DEC-020).
       #
       # RAAF agents use .run method for execution, not the standard Ruby .call convention.
@@ -21,7 +21,7 @@ module RuboCop
       #   tool = SomeTool.new
       #   result = tool.call  # This is correct for tools
       #
-      class RaafAgentRun < Base
+      class AgentRun < Base
         extend AutoCorrector
 
         MSG = "RAAF agents must use .run, not .call (DEC-016). " \

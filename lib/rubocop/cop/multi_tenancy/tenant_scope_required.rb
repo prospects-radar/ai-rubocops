@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module MultiTenancy
       # Enforces that models with an account_id column use acts_as_tenant.
       #
       # Multi-tenant data leakage is the most dangerous class of bug in this app.

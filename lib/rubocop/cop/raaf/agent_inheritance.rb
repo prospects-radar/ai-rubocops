@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module RAAF
       # Enforces that all AI agents inherit from ApplicationAgent or a valid RAAF base class.
       #
       # Similar to ServiceInheritance - ensures proper base class for AI components (DEC-016).
@@ -36,7 +36,7 @@ module RuboCop
       #     end
       #   end
       #
-      class RaafAgentInheritance < Base
+      class AgentInheritance < Base
         extend AutoCorrector
 
         MSG = "AI agents must inherit from ApplicationAgent (DEC-016). " \

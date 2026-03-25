@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module RAAF
       # Flags agents that call `.run` on other agents directly inside their
       # own `.run` method. Multi-agent orchestration should use
       # `RAAF::Pipeline` for traceability, testability, and auditability.
@@ -22,7 +22,7 @@ module RuboCop
       #     flow BroadQueryFormulator >> MyAnalyzer
       #   end
       #
-      class RaafAgentNoInlineOrchestration < Base
+      class AgentNoInlineOrchestration < Base
         MSG = "Avoid calling `.run` on other agents inside an agent's `run` method. " \
               "Use `RAAF::Pipeline` for multi-agent orchestration."
 

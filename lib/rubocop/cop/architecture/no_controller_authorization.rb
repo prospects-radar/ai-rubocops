@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module Architecture
       # Prevents authorization logic in controller actions (business logic)
       #
       # @example

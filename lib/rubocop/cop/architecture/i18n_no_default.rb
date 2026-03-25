@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module Architecture
       # Enforces strict I18n mode - no default parameters allowed.
       #
       # Strict I18n mode is enabled, so all translations must exist in locale files.

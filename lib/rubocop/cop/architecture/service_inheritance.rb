@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module Architecture
       # Enforces that all service classes inherit from BaseService.
       #
       # This ensures compliance with the mandatory Service-Controller Architecture (DEC-013),

@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module Architecture
       # Prevents services from accepting current_user or current_ability as initialization parameters.
       #
       # Services should access Current.current_user internally, not receive it as a parameter.

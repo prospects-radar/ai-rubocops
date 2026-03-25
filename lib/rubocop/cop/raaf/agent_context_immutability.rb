@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module RAAF
       # Prevents agents from mutating shared context directly.
       #
       # Agents should return new data rather than modifying shared context hashes.

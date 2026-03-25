@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module RAAF
       # Detects user-provided data interpolated directly into AI prompt strings.
       #
       # Prompt injection is a real risk when user input flows into system or user

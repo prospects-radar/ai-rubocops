@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module Convention
       # Enforces symbol access over string access for hash/JSON data.
       #
       # This cop is STRICT - it flags ALL string access patterns except for known

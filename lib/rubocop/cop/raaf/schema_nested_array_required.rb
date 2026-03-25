@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module RAAF
       # Ensures nested array fields in RAAF schemas include `required: true`
       #
       # RAAF requires nested array properties to explicitly mark the field

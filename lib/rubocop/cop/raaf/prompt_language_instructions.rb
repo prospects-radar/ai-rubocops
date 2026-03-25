@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module RAAF
       # Ensures AI prompts include language_output_instructions for I18n
       #
       # @example

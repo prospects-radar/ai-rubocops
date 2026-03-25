@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module Architecture
       # Enforces that services use rescue_from DSL or structured error handling
       # instead of bare rescue blocks.
       #

@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module Architecture
       # Enforces consistent service response format: success_result() and error_result().
       #
       # Services should return standardized hashes using BaseService helper methods,

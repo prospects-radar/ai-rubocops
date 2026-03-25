@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module Cucumber
       # Enforces the use of data-test-id attributes in Cucumber step definitions
       # instead of CSS selectors or text-based selectors for language independence.
       #
@@ -30,7 +30,7 @@ module RuboCop
       # @example Good - tid helper (preferred in components)
       #   button(**tid("submit-button"))
       #
-      class CucumberPreferTestId < Base
+      class PreferTestId < Base
         MSG_CSS_SELECTOR = "Use data-test-id instead of CSS selectors for language-independent testing. " \
                           "Replace with find('[data-testid=\"...\"]')"
         MSG_TEXT_SELECTOR = "Use data-test-id instead of text-based selectors for language-independent testing. " \

@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module Architecture
       # Prevents business logic in controllers - enforces zero-logic delegation (DEC-013).
       #
       # Controllers must be thin wrappers that only delegate to services.

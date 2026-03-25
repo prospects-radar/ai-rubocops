@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module Convention
       # Enforces frozen_string_literal: true at the top of all Ruby files.
       #
       # This is REQUIRED per AGENTS.md and ensures string immutability for better performance.

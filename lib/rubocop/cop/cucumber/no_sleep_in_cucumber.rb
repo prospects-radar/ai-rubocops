@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module Cucumber
       # Detects use of `sleep` in Cucumber step definitions.
       #
       # Sleep statements in tests are anti-patterns that make tests slow and flaky.

@@ -2,7 +2,7 @@
 
 module RuboCop
   module Cop
-    module ProspectsRadar
+    module RAAF
       # Enforces RAAF prompt method naming: def system and def user,
       # not custom render methods (DEC-019).
       #
@@ -31,7 +31,7 @@ module RuboCop
       #     end
       #   end
       #
-      class RaafPromptMethods < Base
+      class PromptMethods < Base
         extend AutoCorrector
 
         MSG = "RAAF prompts must use 'def system' and 'def user' methods, " \
