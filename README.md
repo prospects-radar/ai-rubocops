@@ -19,7 +19,7 @@ require:
 
 ## Cop Categories
 
-### DesignSystem (33 cops)
+### DesignSystem (36 cops)
 
 Enforce GlassMorph atomic design system conventions.
 
@@ -46,6 +46,7 @@ Enforce GlassMorph atomic design system conventions.
 | `NoInlineStyles` | Use CSS classes instead of inline styles | No |
 | `EnforceDesignTokenClasses` | Use design tokens, not hardcoded colors | No |
 | `ButtonVariantRequired` | Button must specify variant | No |
+| `GlassCardVariant` | GlassCard must use a supported variant set | No |
 | `SinglePrimaryButtonPerSection` | Max one primary button per section | No |
 | `NoRawButtonsInViews` | Use Button atom in views | No |
 | `NoRawLinkTags` | Use Link atom instead of raw `<a>` | No |
@@ -53,6 +54,8 @@ Enforce GlassMorph atomic design system conventions.
 | `WizardStructure` | Wizard step structure | No |
 | `NoNewPrelineUsage` | Deprecation: no new Preline CSS | No |
 | `NoNewTailwindUsage` | Deprecation: no new Tailwind CSS | No |
+| `NoEmbeddedCssInLayouts` | Keep stable CSS out of GlassMorph layouts | No |
+| `NoLegacyNewUiReference` | Ban legacy `NewUi` / `new_ui` references in Ruby source | No |
 | `NoRawBiIconClasses` | Use Icon atom instead of `bi bi-*` classes | No |
 | `NoRawSvgInComponents` | Use Icon atom instead of inline SVGs | No |
 | `NoPrelineInGlassMorph` | No Preline in GlassMorph components | No |
