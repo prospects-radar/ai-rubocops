@@ -195,14 +195,23 @@ module RuboCop
             tid_calls << send_node if send_node.method_name == :tid
           end
 
+          # Also detect test_id: "..." keyword arguments in render/new calls
+          # (organisms that delegate rendering to another component via test_id: param)
+          node.each_descendant(:pair) do |pair_node|
+            key = pair_node.key
+            next unless key.sym_type? && key.value == :test_id
+
+            value = pair_node.value
+            tid_calls << pair_node if value.str_type?
+          end
+
           tid_calls
         end
 
         def validate_test_id_naming(tid_node)
-          # Extract test ID string from tid("test-id") call
-          return unless tid_node.arguments.any?
-
-          arg = tid_node.arguments.first
+          # Extract test ID string from tid("test-id") call or test_id: "..." pair
+          arg = tid_node.pair_type? ? tid_node.value : tid_node.arguments.first
+          return unless arg
           return unless arg.str_type?
 
           test_id = arg.str_content
