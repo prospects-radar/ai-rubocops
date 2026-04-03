@@ -34,6 +34,8 @@ module RuboCop
       #   end
       #
       class AggregateFailures < Base
+        extend AutoCorrector
+
         MSG = "Use `:aggregate_failures` when an `it` block has %<count>d expectations. " \
               "This reports all failures at once instead of stopping at the first."
 
@@ -52,7 +54,10 @@ module RuboCop
           return if expectation_count < EXPECTATION_THRESHOLD
 
           add_offense(node.send_node,
-            message: format(MSG, count: expectation_count))
+            message: format(MSG, count: expectation_count)) do |corrector|
+            last_arg = node.send_node.arguments.last
+            corrector.insert_after(last_arg.source_range, ", :aggregate_failures")
+          end
         end
 
         private

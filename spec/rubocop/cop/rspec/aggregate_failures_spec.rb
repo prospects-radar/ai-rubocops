@@ -22,6 +22,44 @@ RSpec.describe RuboCop::Cop::RSpec::AggregateFailures, :config do
       RUBY
     end
 
+    it "autocorrects by adding :aggregate_failures after description" do
+      expect_offense(<<~RUBY, source_file_path)
+        it "validates the record" do
+        ^^^^^^^^^^^^^^^^^^^^^^^^^ RSpec/AggregateFailures: Use `:aggregate_failures` when an `it` block has 3 expectations. This reports all failures at once instead of stopping at the first.
+          expect(record.name).to eq("Foo")
+          expect(record.status).to eq("active")
+          expect(record.score).to be > 0
+        end
+      RUBY
+
+      expect_correction(<<~RUBY)
+        it "validates the record", :aggregate_failures do
+          expect(record.name).to eq("Foo")
+          expect(record.status).to eq("active")
+          expect(record.score).to be > 0
+        end
+      RUBY
+    end
+
+    it "autocorrects when it block already has other metadata tags" do
+      expect_offense(<<~RUBY, source_file_path)
+        it "validates the record", :focus do
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ RSpec/AggregateFailures: Use `:aggregate_failures` when an `it` block has 3 expectations. This reports all failures at once instead of stopping at the first.
+          expect(record.name).to eq("Foo")
+          expect(record.status).to eq("active")
+          expect(record.score).to be > 0
+        end
+      RUBY
+
+      expect_correction(<<~RUBY)
+        it "validates the record", :focus, :aggregate_failures do
+          expect(record.name).to eq("Foo")
+          expect(record.status).to eq("active")
+          expect(record.score).to be > 0
+        end
+      RUBY
+    end
+
     it "does not register offense with aggregate_failures tag" do
       expect_no_offenses(<<~RUBY, source_file_path)
         it "validates the record", :aggregate_failures do
