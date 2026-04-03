@@ -34,6 +34,7 @@ require_relative "rubocop/cop/design_system/no_raw_link_tags"
 require_relative "rubocop/cop/design_system/no_inline_styles"
 require_relative "rubocop/cop/design_system/enforce_design_token_classes"
 require_relative "rubocop/cop/design_system/button_variant_required"
+require_relative "rubocop/cop/design_system/glass_card_variant"
 require_relative "rubocop/cop/design_system/single_primary_button_per_section"
 
 # Modal & Wizard Enforcement
@@ -43,6 +44,8 @@ require_relative "rubocop/cop/design_system/wizard_structure"
 # Deprecation Enforcement
 require_relative "rubocop/cop/design_system/no_new_preline_usage"
 require_relative "rubocop/cop/design_system/no_new_tailwind_usage"
+require_relative "rubocop/cop/design_system/no_embedded_css_in_layouts"
+require_relative "rubocop/cop/design_system/no_legacy_new_ui_reference"
 require_relative "rubocop/cop/design_system/no_raw_bi_icon_classes"
 require_relative "rubocop/cop/design_system/no_raw_svg_in_components"
 require_relative "rubocop/cop/design_system/lookbook_only_glass_morph"
