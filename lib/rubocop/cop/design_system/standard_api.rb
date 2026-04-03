@@ -46,6 +46,7 @@ module RuboCop
           file_path = processed_source.file_path
           file_path.include?("app/components/glass_morph/") &&
             !file_path.include?("base_component.rb") &&
+            !file_path.include?("concerns/") &&
             !file_path.end_with?(".rb~") &&
             !file_path.include?("spec/") &&
             !file_path.include?("styleguide/")

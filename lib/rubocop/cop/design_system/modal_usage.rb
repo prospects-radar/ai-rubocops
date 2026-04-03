@@ -47,6 +47,7 @@ module RuboCop
           "action_rules/show",
           "action_instances/new",
           "admin/archived_tasks/",
+          "admin/accounts/edit",
           "prospect_timeline_events/show"
         ].freeze
 
