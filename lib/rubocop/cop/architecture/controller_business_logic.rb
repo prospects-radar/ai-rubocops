@@ -289,17 +289,33 @@ module RuboCop
         end
 
         def devise_error_handling?(node)
-          # Allow resource.errors.add in Devise controllers
-          return false unless node.send_type? && node.method?(:add)
+          # Allow resource.errors.* patterns in Devise controller overrides.
+          # Covers resource.errors.add, resource.errors.empty?, resource.errors.any?, etc.
+          # The cop fires on the `errors` call node, so check that the receiver is
+          # the Devise magic variable `resource` or `user`.
+          #
+          # In controllers, `resource` is a Devise helper method (send node with nil receiver),
+          # not a local variable, so we must handle both lvar and send types.
+          return false unless node.send_type? && node.method?(:errors)
 
           receiver = node.receiver
-          return false unless receiver&.send_type? && receiver.method?(:errors)
+          return false unless receiver
 
-          resource = receiver.receiver
-          return false unless resource&.lvar_type?
+          devise_resource_name?(receiver)
+        end
 
-          var_name = resource.children[0].to_s
-          %w[resource user].include?(var_name)
+        def devise_resource_name?(node)
+          # Local variable: resource = ...; resource.errors
+          if node.lvar_type?
+            return %w[resource user].include?(node.children[0].to_s)
+          end
+
+          # Method call with no explicit receiver: resource.errors (Devise helper)
+          if node.send_type? && node.receiver.nil?
+            return %w[resource user].include?(node.method_name.to_s)
+          end
+
+          false
         end
       end
     end
