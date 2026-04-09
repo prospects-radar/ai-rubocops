@@ -28,11 +28,21 @@ require_relative "rubocop/cop/design_system/component_tid_usage"
 require_relative "rubocop/cop/design_system/component_test_id_required"
 require_relative "rubocop/cop/design_system/no_inline_event_handlers"
 
+# Raw HTML Element Enforcement
+require_relative "rubocop/cop/design_system/no_raw_html_components"
+require_relative "rubocop/cop/design_system/no_raw_flex_divs"
+require_relative "rubocop/cop/design_system/no_raw_labels"
+require_relative "rubocop/cop/design_system/no_raw_badge_spans"
+require_relative "rubocop/cop/design_system/no_raw_textareas"
+require_relative "rubocop/cop/design_system/no_styled_paragraphs"
+
 # Design Token & Style Enforcement
 require_relative "rubocop/cop/design_system/no_raw_buttons_in_views"
 require_relative "rubocop/cop/design_system/no_raw_link_tags"
 require_relative "rubocop/cop/design_system/no_inline_styles"
 require_relative "rubocop/cop/design_system/enforce_design_token_classes"
+require_relative "rubocop/cop/design_system/no_extra_classes_on_standardized_components"
+require_relative "rubocop/cop/design_system/use_parent_gap_for_spacing"
 require_relative "rubocop/cop/design_system/button_variant_required"
 require_relative "rubocop/cop/design_system/glass_card_variant"
 require_relative "rubocop/cop/design_system/single_primary_button_per_section"
