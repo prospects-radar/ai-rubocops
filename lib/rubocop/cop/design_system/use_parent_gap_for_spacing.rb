@@ -32,7 +32,7 @@ module RuboCop
       #
       class UseParentGapForSpacing < Base
         MSG = "Use parent container's gap: parameter for spacing instead of " \
-              "margin utilities. Components should not have mt-, mb-, ms-, me-, m- classes. " \
+              "margin utilities. Components should not have mt-, mb-, ms-, me-, or m- classes. " \
               "Set gap: :xs/:sm/:md/:lg/:xl on the parent FlexRow/FlexColumn. " \
               "Detected margin utilities: %<classes>s"
 
@@ -44,9 +44,10 @@ module RuboCop
         ].freeze
 
         # Margin utility patterns that indicate violations
+        # Note: Only margin utilities (external spacing) are restricted.
+        # Padding utilities (internal spacing) are allowed on components.
         MARGIN_PATTERNS = %w[
           mt- mb- ms- me- m-
-          pt- pb- ps- pe- p-
         ].freeze
 
         def on_send(node)
