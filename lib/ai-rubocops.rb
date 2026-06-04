@@ -47,6 +47,7 @@ require_relative "rubocop/cop/design_system/use_parent_gap_for_spacing"
 require_relative "rubocop/cop/design_system/button_variant_required"
 require_relative "rubocop/cop/design_system/glass_card_variant"
 require_relative "rubocop/cop/design_system/single_primary_button_per_section"
+require_relative "rubocop/cop/design_system/bannable_severity_required"
 
 # Modal & Wizard Enforcement
 require_relative "rubocop/cop/design_system/modal_usage"
