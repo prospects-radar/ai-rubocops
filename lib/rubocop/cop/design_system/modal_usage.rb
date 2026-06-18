@@ -24,6 +24,11 @@ module RuboCop
       #   TurboModal.new(title: "Title", close_path: path)
       #   ConfirmationModal(title: "Confirm", message: "Are you sure?")
       #
+      #   # also good - `modal-content` is the standard body slot rendered INSIDE a
+      #   # design-system modal (e.g. the form body of a TurboModal). It is not a
+      #   # hand-rolled modal on its own, so it is intentionally NOT flagged.
+      #   Box(class: "modal-content") { ... }   # inside TurboModal/Modal block
+      #
       #   # ignored - these files implement modal body structure, not consume it
       #   # app/components/glass_morph/organisms/onboarding/*.rb
       #   # app/components/glass_morph/organisms/simple_onboarding/*.rb
@@ -33,7 +38,11 @@ module RuboCop
         MSG = "Use design system modal components (Modal, TurboModal, ConfirmationModal, DangerModal) " \
               "instead of raw modal HTML. See app/components/glass_morph/organisms/ for available modals."
 
-        RAW_MODAL_CLASSES = /\b(modal\s+fade|modal-dialog|modal-content)\b/
+        # Hand-rolled Bootstrap modals always declare the outer `modal fade` and/or
+        # `modal-dialog` wrappers. `modal-content` alone is the body slot rendered
+        # inside a design-system modal (TurboModal/Modal) and is intentionally NOT
+        # matched — flagging it would false-positive the standard modal body.
+        RAW_MODAL_CLASSES = /\b(modal\s+fade|modal-dialog)\b/
 
         # Paths that ARE modal body implementations — they intentionally contain
         # modal-content/modal-dialog class strings as part of their own structure.
