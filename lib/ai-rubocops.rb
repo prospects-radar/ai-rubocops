@@ -96,6 +96,12 @@ require_relative "rubocop/cop/raaf/agent_context_immutability"
 # === MultiTenancy Cops ===
 require_relative "rubocop/cop/multi_tenancy/tenant_scope_required"
 
+# === MCP Cops ===
+require_relative "rubocop/cop/mcp/no_active_record_in_tools"
+require_relative "rubocop/cop/mcp/adapter_base"
+require_relative "rubocop/cop/mcp/service_writes_dry_run"
+require_relative "rubocop/cop/mcp/automation_controller_delegation"
+
 # === Convention Cops ===
 require_relative "rubocop/cop/convention/prefer_symbol_json_access"
 # require_relative "rubocop/cop/convention/frozen_string_literal" # Use Style/FrozenStringLiteralComment instead
