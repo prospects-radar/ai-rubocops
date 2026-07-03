@@ -53,6 +53,8 @@ module RuboCop
           class_name = node.identifier.source
           file_path = processed_source.file_path
 
+          return false if class_name.end_with?("Error")
+
           # Check if it's a service by name or path
           class_name.end_with?("Service") || file_path.include?("app/services/")
         end
@@ -71,8 +73,8 @@ module RuboCop
           return false unless parent
 
           parent_name = parent.source
-          # Allow various forms of BaseService reference
-          %w[BaseService ::BaseService ApplicationService ::ApplicationService].include?(parent_name)
+          # Allow BaseService and known intermediate base classes that inherit from it
+          %w[BaseService ::BaseService ApplicationService ::ApplicationService BaseAdapter].include?(parent_name)
         end
       end
     end
