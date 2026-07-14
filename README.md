@@ -113,7 +113,7 @@ General code conventions.
 | `PreferSymbolJsonAccess` | Use symbol keys for JSON access | No |
 | `FrozenStringLiteral` | Frozen string literal pragma (disabled) | Yes |
 
-### RSpec (7 cops)
+### RSpec (10 cops)
 
 Improve test quality and reliability.
 
@@ -126,6 +126,9 @@ Improve test quality and reliability.
 | `FlakyTimePatterns` | Detect `Time.now`/`Date.today` without time freezing | No |
 | `TestDataOrdering` | Avoid `.first`/`.last` without explicit ordering | No |
 | `AggregateFailures` | Use `:aggregate_failures` for 3+ expectations | No |
+| `MaxLetPerContext` | Flag groups declaring more than `Max` (default 5) `let`/`let!` | No |
+| `NoLetOverrideInChildContext` | Flag a `let` overriding one from an enclosing context | No |
+| `NoActionInLet` | Flag a plain `let` whose body performs a side-effecting action | No |
 
 ### FactoryBot (1 cop)
 

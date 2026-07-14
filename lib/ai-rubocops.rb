@@ -107,6 +107,10 @@ require_relative "rubocop/cop/convention/prefer_symbol_json_access"
 # require_relative "rubocop/cop/convention/frozen_string_literal" # Use Style/FrozenStringLiteralComment instead
 
 # === RSpec Cops ===
+require_relative "rubocop/cop/rspec/ai_let_helpers" # shared mixin, load first
+require_relative "rubocop/cop/rspec/max_let_per_context"
+require_relative "rubocop/cop/rspec/no_let_override_in_child_context"
+require_relative "rubocop/cop/rspec/no_action_in_let"
 require_relative "rubocop/cop/rspec/prefer_build_stubbed_for_non_persisted"
 require_relative "rubocop/cop/rspec/service_requires_tenant_setup"
 require_relative "rubocop/cop/rspec/prefer_let_over_instance_variable"
