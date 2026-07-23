@@ -92,6 +92,7 @@ require_relative "rubocop/cop/raaf/logger"
 require_relative "rubocop/cop/raaf/prompt_user_input_escaping"
 require_relative "rubocop/cop/raaf/agent_schema_validation"
 require_relative "rubocop/cop/raaf/agent_context_immutability"
+require_relative "rubocop/cop/raaf/agent_config_in_yaml"
 
 # === MultiTenancy Cops ===
 require_relative "rubocop/cop/multi_tenancy/tenant_scope_required"
