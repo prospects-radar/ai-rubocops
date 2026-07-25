@@ -105,6 +105,8 @@ require_relative "rubocop/cop/mcp/automation_controller_delegation"
 
 # === Convention Cops ===
 require_relative "rubocop/cop/convention/prefer_symbol_json_access"
+require_relative "rubocop/cop/convention/encode_record_ids_in_views"
+require_relative "rubocop/cop/convention/no_double_decode_hashed_id"
 # require_relative "rubocop/cop/convention/frozen_string_literal" # Use Style/FrozenStringLiteralComment instead
 
 # === RSpec Cops ===
