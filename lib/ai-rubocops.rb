@@ -121,6 +121,7 @@ require_relative "rubocop/cop/rspec/prefer_shared_context"
 require_relative "rubocop/cop/rspec/flaky_time_patterns"
 require_relative "rubocop/cop/rspec/test_data_ordering"
 require_relative "rubocop/cop/rspec/aggregate_failures"
+require_relative "rubocop/cop/rspec/no_live_http_connections"
 
 # === FactoryBot Cops ===
 require_relative "rubocop/cop/factory_bot/explicit_tenant_handling"
