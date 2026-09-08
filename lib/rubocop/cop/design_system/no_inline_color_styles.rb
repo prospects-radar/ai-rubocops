@@ -79,7 +79,9 @@ module RuboCop
         end
 
         def color_css_properties_in(css)
-          COLOR_CSS_PROPERTIES.select { |prop| css.match?(/\b#{Regexp.escape(prop)}\s*:/) }
+          # `(?<![-\w])` keeps `background-color:` from also matching the bare
+          # `color` property and reporting the same declaration twice.
+          COLOR_CSS_PROPERTIES.select { |prop| css.match?(/(?<![-\w])#{Regexp.escape(prop)}\s*:/) }
         end
 
         # ── icon_color: "#abc" or color: "var(--gm-red-500)" ─────────────────

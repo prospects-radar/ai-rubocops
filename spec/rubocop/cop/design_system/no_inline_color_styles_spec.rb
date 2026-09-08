@@ -21,35 +21,35 @@ RSpec.describe RuboCop::Cop::DesignSystem::NoInlineColorStyles, :config do
   it "registers an offense for inline style with CSS variable color" do
     expect_offense(<<~RUBY, source_file_path)
       Heading(level: 3, style: "color: var(--gm-teal-700); margin-bottom: 5px;") { title }
-                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid inline colour styles (`color:`). Add a BEM class to the component's CSS file and pass it via `class:` instead.
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid inline colour styles (`color:`). Add a BEM class to the component's CSS file and pass it via `class:` instead.
     RUBY
   end
 
   it "registers an offense for inline style with hex background" do
     expect_offense(<<~RUBY, source_file_path)
       Box(style: "background: #dc3545; padding: 8px;") { content }
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid inline colour styles (`background:`). Add a BEM class to the component's CSS file and pass it via `class:` instead.
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid inline colour styles (`background:`). Add a BEM class to the component's CSS file and pass it via `class:` instead.
     RUBY
   end
 
   it "registers an offense for inline style with named color" do
     expect_offense(<<~RUBY, source_file_path)
       Span(style: "color: red;") { text }
-           ^^^^^^^^^^^^^^^^^^^^^ Avoid inline colour styles (`color:`). Add a BEM class to the component's CSS file and pass it via `class:` instead.
+           ^^^^^^^^^^^^^^^^^^^^ Avoid inline colour styles (`color:`). Add a BEM class to the component's CSS file and pass it via `class:` instead.
     RUBY
   end
 
   it "registers an offense for inline style with background-color" do
     expect_offense(<<~RUBY, source_file_path)
       Box(style: "background-color: var(--gm-blue-overlay-8);") { content }
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid inline colour styles (`background-color:`). Add a BEM class to the component's CSS file and pass it via `class:` instead.
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid inline colour styles (`background-color:`). Add a BEM class to the component's CSS file and pass it via `class:` instead.
     RUBY
   end
 
   it "registers an offense for inline style with kanban CSS variable color" do
     expect_offense(<<~RUBY, source_file_path)
       Heading(level: 3, weight: :semibold, style: "font-size: 1rem; color: var(--kanban-header-text); margin: 0;") { @title }
-                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid inline colour styles (`color:`). Add a BEM class to the component's CSS file and pass it via `class:` instead.
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid inline colour styles (`color:`). Add a BEM class to the component's CSS file and pass it via `class:` instead.
     RUBY
   end
 
@@ -77,7 +77,7 @@ RSpec.describe RuboCop::Cop::DesignSystem::NoInlineColorStyles, :config do
   it "registers an offense for color param with CSS variable string" do
     expect_offense(<<~RUBY, source_file_path)
       render SliderComponent.new(color: "var(--gm-red-500)")
-                                 ^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid hardcoded colour value in `color:`. Use a symbol variant (e.g. `icon_variant: :danger`) or a BEM CSS class instead.
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid hardcoded colour value in `color:`. Use a symbol variant (e.g. `icon_variant: :danger`) or a BEM CSS class instead.
     RUBY
   end
 
