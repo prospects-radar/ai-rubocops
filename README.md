@@ -78,7 +78,16 @@ Enforce application architecture: services, controllers, and conventions.
 | `NoControllerAuthorization` | Authorization in services, not controllers | No |
 | `I18nNoDefault` | No `default:` parameter in `I18n.t` | Yes |
 
-### RAAF (11 cops)
+### RAAF (19 cops)
+
+Two groups share this department. The **agent** cops enforce ProspectsRadar's
+own conventions for code that *uses* RAAF, and are scoped to `app/ai/**` in the
+host's `.rubocop.yml`. The **evaluator** cops enforce a contract that binds any
+evaluator anywhere, so they also run against RAAF's built-in evaluator library
+when that repo is linted; their scoping ships in `config/default.yml` rather
+than being restated per project.
+
+#### Agent cops (11)
 
 Enforce RAAF AI agent conventions and safety.
 
@@ -95,6 +104,24 @@ Enforce RAAF AI agent conventions and safety.
 | `PromptUserInputEscaping` | Don't interpolate user data in system prompts | No |
 | `AgentSchemaValidation` | Validate output against declared schema | No |
 | `AgentContextImmutability` | Don't mutate shared agent context | No |
+
+#### Evaluator cops (8)
+
+Enforce the evaluator contract in `RAAF::Eval`.
+
+| Cop | Purpose | Auto-fix |
+|-----|---------|----------|
+| `EvaluatorLabelString` | Labels are the strings `"good"`/`"average"`/`"bad"`, never symbols | Yes |
+| `EvaluatorName` | Every evaluator declares `evaluator_name` so the registry can reach it | No |
+| `EvaluatorBaseClass` | Inherit the shared base rather than including the interface module | No |
+| `EvaluatorThresholdDefaults` | Resolve thresholds via `resolve_thresholds`, not inline defaults | No |
+| `DiscardedPromptBuild` | A built prompt whose return value is thrown away | No |
+| `MockImplementation` | No `mock_*`/`simulate_*` placeholder scoring in library code | No |
+| `UnregisteredEvaluator` | Evaluators appear in every manifest that publishes them | No |
+
+`EvaluatorLabelString` and `EvaluatorName` apply to an application's own
+evaluators as well as RAAF's; the rest describe RAAF library internals and are
+scoped to that tree.
 
 ### MultiTenancy (1 cop)
 

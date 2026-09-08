@@ -94,6 +94,17 @@ require_relative "rubocop/cop/raaf/agent_schema_validation"
 require_relative "rubocop/cop/raaf/agent_context_immutability"
 require_relative "rubocop/cop/raaf/agent_config_in_yaml"
 
+# RAAF evaluator cops. These police evaluator classes — RAAF's built-in library
+# and an application's own — rather than agents. See config/default.yml for the
+# paths each is scoped to.
+require_relative "rubocop/cop/raaf/evaluator_label_string"
+require_relative "rubocop/cop/raaf/evaluator_name"
+require_relative "rubocop/cop/raaf/evaluator_base_class"
+require_relative "rubocop/cop/raaf/evaluator_threshold_defaults"
+require_relative "rubocop/cop/raaf/discarded_prompt_build"
+require_relative "rubocop/cop/raaf/mock_implementation"
+require_relative "rubocop/cop/raaf/unregistered_evaluator"
+
 # === MultiTenancy Cops ===
 require_relative "rubocop/cop/multi_tenancy/tenant_scope_required"
 
@@ -133,3 +144,29 @@ require_relative "rubocop/cop/cucumber/prefer_atomic_steps"
 require_relative "rubocop/cop/cucumber/no_silent_database_rescue"
 require_relative "rubocop/cop/cucumber/prefer_test_id"
 require_relative "rubocop/cop/cucumber/no_sleep_in_cucumber"
+
+# === Default configuration ===
+#
+# `require:` is process-wide: once any config in the tree loads this gem, its
+# cops are registered for every file in the run, including trees governed by a
+# .rubocop.yml that never inherited our settings. Merging config/default.yml
+# into RuboCop's default configuration gives every config the same defaults.
+module AiRubocops
+  # Merges config/default.yml into RuboCop's default configuration.
+  module Inject
+    CONFIG_PATH = File.expand_path("../config/default.yml", __dir__)
+
+    def self.defaults!
+      return unless File.exist?(CONFIG_PATH)
+
+      hash = RuboCop::ConfigLoader.send(:load_yaml_configuration, CONFIG_PATH)
+      config = RuboCop::Config.new(hash, CONFIG_PATH)
+      RuboCop::ConfigLoader.instance_variable_set(
+        :@default_configuration,
+        RuboCop::ConfigLoader.merge_with_default(config, CONFIG_PATH)
+      )
+    end
+  end
+end
+
+AiRubocops::Inject.defaults!

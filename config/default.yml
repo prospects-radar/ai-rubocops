@@ -1,0 +1,86 @@
+# Default settings for cops that need scoping to run correctly.
+#
+# Only the RAAF evaluator cops are listed. Every other cop in this gem is
+# configured by the consuming .rubocop.yml, which continues to work unchanged —
+# a setting there is more specific and still wins.
+#
+# Two audiences share these cops:
+#
+#   * an application's own evaluators (ProspectsRadar: app/ai/evaluators/**)
+#   * RAAF's built-in evaluator library (vendor/local_gems/raaf/eval/lib/**)
+#
+# The first two cops enforce a contract that binds any evaluator anywhere, so
+# they match both. The rest describe RAAF's internals — its base class, its
+# judge plumbing, its registry manifests — and are scoped to the gem's tree.
+
+# --- Contracts that bind every evaluator ------------------------------------
+
+RAAF/EvaluatorLabelString:
+  Description: 'Evaluator labels are the strings "good", "average" and "bad".'
+  Enabled: true
+  VersionAdded: '1.1'
+  Include:
+    - '**/evaluators/**/*.rb'
+    - '**/eval/lib/raaf/eval/dsl/**/*.rb'
+
+RAAF/EvaluatorName:
+  Description: 'Every evaluator declares evaluator_name so the registry can reach it.'
+  Enabled: true
+  VersionAdded: '1.1'
+  Include:
+    - '**/evaluators/**/*.rb'
+  BaseClasses:
+    - 'BaseEvaluator'
+    - 'Evaluators::Base'
+  AllowedNames:
+    - 'BaseEvaluator'
+    - 'Base'
+
+# --- RAAF library internals -------------------------------------------------
+
+RAAF/EvaluatorBaseClass:
+  Description: 'Evaluators inherit the shared base class instead of including the interface module.'
+  Enabled: true
+  VersionAdded: '1.1'
+  Include:
+    - '**/eval/lib/raaf/eval/evaluators/**/*.rb'
+  InterfaceModule: 'DSL::Evaluator'
+  BaseClass: 'RAAF::Eval::Evaluators::Base'
+
+RAAF/EvaluatorThresholdDefaults:
+  Description: 'Thresholds resolve through resolve_thresholds, not inline defaults.'
+  Enabled: true
+  VersionAdded: '1.1'
+  Include:
+    - '**/eval/lib/raaf/eval/evaluators/**/*.rb'
+
+RAAF/DiscardedPromptBuild:
+  Description: 'A prompt is built and its return value thrown away.'
+  Enabled: true
+  VersionAdded: '1.1'
+  Include:
+    - '**/eval/lib/**/*.rb'
+  Pattern: '\Abuild_\w*prompt\z'
+
+RAAF/MockImplementation:
+  Description: 'Placeholder scoring does not ship as library code.'
+  Enabled: true
+  VersionAdded: '1.1'
+  Include:
+    - '**/eval/lib/**/*.rb'
+  Pattern: '\A(mock|simulate|fake|dummy)_'
+
+RAAF/UnregisteredEvaluator:
+  Description: 'Evaluators appear in every manifest that publishes them.'
+  Enabled: true
+  VersionAdded: '1.1'
+  Include:
+    - '**/eval/lib/raaf/eval/evaluators/**/*.rb'
+  EvaluatorsRoot: 'evaluators'
+  AllowedNames:
+    - 'BaseEvaluator'
+    - 'Base'
+  # Real paths, not globs: resolved by walking up from the file inspected.
+  Manifests:
+    - 'eval/lib/raaf/eval/evaluators/all_evaluators.rb'
+    - 'eval/lib/raaf/eval/dsl/evaluator_registry.rb'

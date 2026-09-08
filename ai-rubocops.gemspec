@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = ">= 3.2.0"
 
   spec.files = Dir.chdir(__dir__) do
-    Dir["{lib,docs}/**/*", "README.md", "CHANGELOG.md", "LICENSE", "ai-rubocops.gemspec"]
+    Dir["{lib,config,docs}/**/*", "README.md", "CHANGELOG.md", "LICENSE", "ai-rubocops.gemspec"]
   end
   spec.require_paths = ["lib"]
 
