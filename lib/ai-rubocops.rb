@@ -41,6 +41,7 @@ require_relative "rubocop/cop/design_system/no_raw_buttons_in_views"
 require_relative "rubocop/cop/design_system/no_raw_link_tags"
 require_relative "rubocop/cop/design_system/no_inline_styles"
 require_relative "rubocop/cop/design_system/no_inline_color_styles"
+require_relative "rubocop/cop/design_system/approved_icons_only"
 require_relative "rubocop/cop/design_system/enforce_design_token_classes"
 require_relative "rubocop/cop/design_system/no_extra_classes_on_standardized_components"
 require_relative "rubocop/cop/design_system/use_parent_gap_for_spacing"
@@ -79,6 +80,9 @@ require_relative "rubocop/cop/architecture/no_controller_authorization"
 
 # I18n
 require_relative "rubocop/cop/architecture/i18n_no_default"
+
+# Company identity resolution
+require_relative "rubocop/cop/architecture/no_substring_identity_match"
 
 # === RAAF Cops (AI Agent Framework) ===
 require_relative "rubocop/cop/raaf/agent_run"
