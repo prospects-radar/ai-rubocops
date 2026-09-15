@@ -28,6 +28,17 @@ module RuboCop
       class ServiceInheritance < Base
         extend AutoCorrector
 
+        # Paths where a class named *Service is a subject, not a service.
+        # `Views::GlassMorph::Pages::TermsOfService` is a page about a service;
+        # the autocorrector below rewrote its parent to BaseService, which left
+        # Rails no `render_in` and the page served an empty 200 for as long as
+        # nobody looked past the status code.
+        NON_SERVICE_PATHS = %w[
+          app/views/
+          app/components/
+          app/layouts/
+        ].freeze
+
         MSG = "Service classes must inherit from BaseService (DEC-013). " \
               "This provides access to success_result, error_result, and other DSL features."
 
@@ -54,6 +65,7 @@ module RuboCop
           file_path = processed_source.file_path
 
           return false if class_name.end_with?("Error")
+          return false if NON_SERVICE_PATHS.any? { |path| file_path.include?(path) }
 
           # Check if it's a service by name or path
           class_name.end_with?("Service") || file_path.include?("app/services/")
