@@ -118,6 +118,18 @@ require_relative "rubocop/cop/mcp/adapter_base"
 require_relative "rubocop/cop/mcp/service_writes_dry_run"
 require_relative "rubocop/cop/mcp/automation_controller_delegation"
 
+# === SharedWork Cops ===
+#
+# The three properties that keep a shared work list inside its purpose when no
+# role guards it any more (ADR-0087): no colleague named on a row, no aggregation
+# per person, no usage behaviour as input. Scoped in the consuming .rubocop.yml to
+# the files that render such a list — see docs/shared_work_cops.md for what they
+# cannot see.
+require_relative "rubocop/cop/shared_work/decision_allowance"
+require_relative "rubocop/cop/shared_work/no_person_aggregation"
+require_relative "rubocop/cop/shared_work/no_person_name_in_work_list"
+require_relative "rubocop/cop/shared_work/no_prospect_view_read"
+
 # === Convention Cops ===
 require_relative "rubocop/cop/convention/prefer_symbol_json_access"
 require_relative "rubocop/cop/convention/encode_record_ids_in_views"
