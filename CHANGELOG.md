@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `Architecture/NoSubstringIdentityMatch` — a `LIKE` against a company's
+  `website` or `domain` whose result is immediately reduced to one row is a
+  substring pretending to be an identity test. It has been wrong three times:
+  `#926` measured `website LIKE '%https%'` putting 2629 of 2841 companies behind
+  one "domain", `#934` removed two copies from the enrichment agents, and `#1055`
+  removed the third, where `arval.nl` matched a stored `notarval.nl` and an
+  `arval.nl.partnersite.com`. Deliberately silent when the result stays a
+  relation — a search filter returning a list is a legitimate substring use, and
+  a name is never a hard key. Columns configurable via `IdentityColumns`.
+
 - `RAAF/EvaluatorLabelString` — evaluator labels must be the strings `"good"`,
   `"average"` and `"bad"`. `EvaluationResult` sorts results by comparing against
   string literals, so a symbol label lands in no bucket: `failed_fields` comes
