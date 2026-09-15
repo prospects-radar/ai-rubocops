@@ -54,12 +54,18 @@ module RuboCop
           node.key.value == :style
         end
 
-        # Only flag values that are actual CSS strings or interpolated strings.
-        # Skip symbols (:bootstrap), variables, and method calls — these are
-        # component parameters, not inline CSS.
+        # `style:` is inline CSS on every GlassMorph component and on every raw
+        # Phlex tag, so a literal there is an offence whatever its type: a string
+        # is inline CSS, and a symbol is not CSS at all — `style: :bootstrap`
+        # renders `style="bootstrap"`, which the browser drops (issue #1065).
+        #
+        # A variable or method call is left alone: it carries a runtime value the
+        # cop cannot read, and the documented escape hatch for those is a disable
+        # comment at the call site.
         def css_value?(value_node)
           return true if value_node.str_type?
           return true if value_node.dstr_type?
+          return true if value_node.sym_type?
           false
         end
 
