@@ -119,14 +119,14 @@ module RuboCop
             (str $_))
         PATTERN
 
-        def_node_matcher :request_env_access?, <<~PATTERN
+        def_node_matcher :request_env_lookup?, <<~PATTERN
           (send
             (send
               (send nil? :request) :env) :[]
             (str $_))
         PATTERN
 
-        def_node_matcher :request_headers_access?, <<~PATTERN
+        def_node_matcher :request_headers_lookup?, <<~PATTERN
           (send
             (send
               (send nil? :request) :headers) :[]
@@ -185,11 +185,11 @@ module RuboCop
         end
 
         def request_env_access?(node, key)
-          request_env_access?(node) && RACK_ENV_VARS.include?(key)
+          request_env_lookup?(node) && RACK_ENV_VARS.include?(key)
         end
 
         def request_headers_access?(node, key)
-          request_headers_access?(node) && HTTP_HEADERS.include?(key)
+          request_headers_lookup?(node) && HTTP_HEADERS.include?(key)
         end
 
         def part_of_conditional_access?(node)
