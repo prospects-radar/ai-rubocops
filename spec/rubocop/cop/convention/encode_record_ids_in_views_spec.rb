@@ -104,4 +104,42 @@ RSpec.describe RuboCop::Cop::Convention::EncodeRecordIdsInViews, :config do
       RUBY
     end
   end
+
+  context "with RawIdKeys configured" do
+    let(:config) do
+      RuboCop::Config.new("Convention/EncodeRecordIdsInViews" => { "RawIdKeys" => %w[run_id] })
+    end
+
+    it "does not flag a key whose model has no encoded id" do
+      expect_no_offenses(<<~RUBY)
+        rollback_path(run_id: run.id)
+      RUBY
+    end
+
+    it "still flags the other *_id keys" do
+      expect_offense(<<~RUBY)
+        new_task_path(prospect_id: @prospect.id)
+                                             ^^ Emit `to_param` (encoded id), not raw `.id`, under `prospect_id:` — raw primary keys leak past the encoded-id boundary and 404 on decode. See HashedId.
+      RUBY
+    end
+  end
+
+  context "with IntegerIdCalls configured" do
+    let(:config) do
+      RuboCop::Config.new("Convention/EncodeRecordIdsInViews" => { "IntegerIdCalls" => %w[IndicatorItem] })
+    end
+
+    it "does not flag the arguments of a call that encodes the id itself" do
+      expect_no_offenses(<<~RUBY)
+        IndicatorItem(title: "Hiring", prospect_id: @prospect.id)
+      RUBY
+    end
+
+    it "still flags the same key in any other call" do
+      expect_offense(<<~RUBY)
+        ActivityItem(prospect_id: @prospect.id)
+                                            ^^ Emit `to_param` (encoded id), not raw `.id`, under `prospect_id:` — raw primary keys leak past the encoded-id boundary and 404 on decode. See HashedId.
+      RUBY
+    end
+  end
 end

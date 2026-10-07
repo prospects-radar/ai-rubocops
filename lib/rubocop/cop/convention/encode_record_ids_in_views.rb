@@ -32,6 +32,12 @@ module RuboCop
       #   # good — raw id is correct here (not flagged)
       #   Prospect.find_by(prospect_company_id: company.id) # AR query condition
       #   t("gdpr.requests.show.request_id", id: @request.id) # i18n text
+      #
+      # Two lists in the cop's config cover what the cop cannot see:
+      #
+      #   RawIdKeys:      [run_id]        # *_id keys of models that have no encoded id
+      #   IntegerIdCalls: [IndicatorItem] # calls that take a raw integer and encode it
+      #                                   # themselves; passing to_param would encode twice
       class EncodeRecordIdsInViews < Base
         extend AutoCorrector
 
@@ -74,7 +80,15 @@ module RuboCop
         def monitored_key?(key)
           return true if DOM_ID_KEYS.include?(key)
 
-          key.to_s.end_with?("_id") && !EXCLUDED_ID_KEYS.include?(key)
+          key.to_s.end_with?("_id") && !EXCLUDED_ID_KEYS.include?(key) && !raw_id_keys.include?(key)
+        end
+
+        def raw_id_keys
+          @raw_id_keys ||= Array(cop_config["RawIdKeys"]).map(&:to_sym)
+        end
+
+        def integer_id_calls
+          @integer_id_calls ||= Array(cop_config["IntegerIdCalls"]).map(&:to_sym)
         end
 
         # A raw record id read: `receiver.id` with a real receiver (not a bare
@@ -91,8 +105,9 @@ module RuboCop
           end
         end
 
-        # Skip when the hash is an ActiveRecord query condition or i18n
-        # interpolation — walk up pair -> hash -> enclosing send.
+        # Skip when the hash is an ActiveRecord query condition, i18n
+        # interpolation, or the arguments of a configured IntegerIdCalls call —
+        # walk up pair -> hash -> enclosing send.
         def skipped_context?(pair_node)
           hash = pair_node.parent
           return false unless hash&.hash_type?
@@ -100,7 +115,7 @@ module RuboCop
           enclosing = hash.parent
           return false unless enclosing&.send_type?
 
-          SKIP_ENCLOSING_METHODS.include?(enclosing.method_name)
+          SKIP_ENCLOSING_METHODS.include?(enclosing.method_name) || integer_id_calls.include?(enclosing.method_name)
         end
       end
     end

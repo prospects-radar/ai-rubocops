@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `Convention/EncodeRecordIdsInViews` takes two lists for what the cop cannot
+  see: `RawIdKeys` (`*_id` keys whose model has no encoded id, e.g. `run_id`)
+  and `IntegerIdCalls` (calls that take a raw integer id and encode it
+  themselves, where `to_param` would encode twice). In ProspectsRadar half the
+  cop's hits were one of the two.
 - `Architecture/NoSubstringIdentityMatch` — a `LIKE` against a company's
   `website` or `domain` whose result is immediately reduced to one row is a
   substring pretending to be an identity test. It has been wrong three times:
