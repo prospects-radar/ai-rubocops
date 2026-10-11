@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `RSpec/MultiplePhases` flags an example with more act/assert phases than
+  `Max` (default 2). A phase is a run of consecutive top-level statements that
+  hold an expectation.
+- `RSpec/MaxStubsPerExample` flags an example whose own body sets up more than
+  `Max` (default 3) `receive` matchers, test doubles, `stub_const` or
+  `stub_request` calls. Stubs in `before` blocks are not counted.
+  Both are adapted from scrap4rb's multiple-phases and high-mocking smells.
+
 - `Convention/EncodeRecordIdsInViews` takes two lists for what the cop cannot
   see: `RawIdKeys` (`*_id` keys whose model has no encoded id, e.g. `run_id`)
   and `IntegerIdCalls` (calls that take a raw integer id and encode it

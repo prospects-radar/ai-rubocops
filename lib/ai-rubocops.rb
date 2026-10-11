@@ -149,6 +149,8 @@ require_relative "rubocop/cop/rspec/flaky_time_patterns"
 require_relative "rubocop/cop/rspec/test_data_ordering"
 require_relative "rubocop/cop/rspec/aggregate_failures"
 require_relative "rubocop/cop/rspec/no_live_http_connections"
+require_relative "rubocop/cop/rspec/multiple_phases"
+require_relative "rubocop/cop/rspec/max_stubs_per_example"
 
 # === FactoryBot Cops ===
 require_relative "rubocop/cop/factory_bot/explicit_tenant_handling"
