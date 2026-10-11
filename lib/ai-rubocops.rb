@@ -134,6 +134,7 @@ require_relative "rubocop/cop/shared_work/no_prospect_view_read"
 require_relative "rubocop/cop/convention/prefer_symbol_json_access"
 require_relative "rubocop/cop/convention/encode_record_ids_in_views"
 require_relative "rubocop/cop/convention/no_double_decode_hashed_id"
+require_relative "rubocop/cop/convention/no_phlex_helpers"
 # require_relative "rubocop/cop/convention/frozen_string_literal" # Use Style/FrozenStringLiteralComment instead
 
 # === RSpec Cops ===
