@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `Mcp/NoServiceWrappers` flags a class defined under app/services/mcp/ and an
+  `Mcp::...Service` constant used from an MCP tool. Tools call the app services
+  the screens use and extend those; an MCP-only layer drifts from them. Existing
+  wrappers belong in the app's Exclude list for the cop, which only shrinks.
 - `RSpec/MultiplePhases` flags an example with more act/assert phases than
   `Max` (default 2). A phase is a run of consecutive top-level statements that
   hold an expectation.

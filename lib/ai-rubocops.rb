@@ -116,6 +116,7 @@ require_relative "rubocop/cop/multi_tenancy/tenant_scope_required"
 require_relative "rubocop/cop/mcp/no_active_record_in_tools"
 require_relative "rubocop/cop/mcp/adapter_base"
 require_relative "rubocop/cop/mcp/service_writes_dry_run"
+require_relative "rubocop/cop/mcp/no_service_wrappers"
 require_relative "rubocop/cop/mcp/automation_controller_delegation"
 
 # === SharedWork Cops ===
