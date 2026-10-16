@@ -86,7 +86,8 @@ module RuboCop
 
           parent_name = parent.source
           # Allow BaseService and known intermediate base classes that inherit from it
-          %w[BaseService ::BaseService ApplicationService ::ApplicationService BaseAdapter].include?(parent_name)
+          %w[BaseService ::BaseService ApplicationService ::ApplicationService BaseAdapter
+             SetActions::Base ::SetActions::Base].include?(parent_name)
         end
       end
     end
