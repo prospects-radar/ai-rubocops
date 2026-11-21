@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Three cops on what a prompt class hands the model (ProspectsRadar #1680):
+  `RAAF/PromptNoRecordIds` flags an `id` / `*_id` read (`x[:id]`, `x.product_id`)
+  interpolated into a string or used as a hash-pair value; `RAAF/PromptNoPlaceholderFallback`
+  flags `x || "literal"` where the literal is not a sentence (`"unknown.com"`,
+  `"General"`; `"No website is known."` passes); `RAAF/PromptUntrustedTextWrapped`
+  flags a third-party field (`Fields`, `BareFields`) interpolated outside
+  `xml_wrap_untrusted` / `escape_xml`. The host scopes them; ProspectsRadar runs them
+  on changed lines only.
 - `Mcp/NoServiceWrappers` flags a class defined under app/services/mcp/ and an
   `Mcp::...Service` constant used from an MCP tool. Tools call the app services
   the screens use and extend those; an MCP-only layer drifts from them. Existing

@@ -98,6 +98,12 @@ require_relative "rubocop/cop/raaf/agent_schema_validation"
 require_relative "rubocop/cop/raaf/agent_context_immutability"
 require_relative "rubocop/cop/raaf/agent_config_in_yaml"
 
+# What a prompt hands the model (#1680): no record ids, no invented fallbacks,
+# no third-party text outside xml_wrap_untrusted.
+require_relative "rubocop/cop/raaf/prompt_no_record_ids"
+require_relative "rubocop/cop/raaf/prompt_no_placeholder_fallback"
+require_relative "rubocop/cop/raaf/prompt_untrusted_text_wrapped"
+
 # RAAF evaluator cops. These police evaluator classes — RAAF's built-in library
 # and an application's own — rather than agents. See config/default.yml for the
 # paths each is scoped to.
