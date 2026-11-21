@@ -78,7 +78,7 @@ Enforce application architecture: services, controllers, and conventions.
 | `NoControllerAuthorization` | Authorization in services, not controllers | No |
 | `I18nNoDefault` | No `default:` parameter in `I18n.t` | Yes |
 
-### RAAF (19 cops)
+### RAAF (22 cops)
 
 Two groups share this department. The **agent** cops enforce ProspectsRadar's
 own conventions for code that *uses* RAAF, and are scoped to `app/ai/**` in the
@@ -87,7 +87,7 @@ evaluator anywhere, so they also run against RAAF's built-in evaluator library
 when that repo is linted; their scoping ships in `config/default.yml` rather
 than being restated per project.
 
-#### Agent cops (11)
+#### Agent cops (14)
 
 Enforce RAAF AI agent conventions and safety.
 
@@ -104,6 +104,9 @@ Enforce RAAF AI agent conventions and safety.
 | `PromptUserInputEscaping` | Don't interpolate user data in system prompts | No |
 | `AgentSchemaValidation` | Validate output against declared schema | No |
 | `AgentContextImmutability` | Don't mutate shared agent context | No |
+| `PromptNoRecordIds` | No record ids interpolated or put in a prompt payload | No |
+| `PromptNoPlaceholderFallback` | No invented `\|\| "literal"` fallbacks in prompts | No |
+| `PromptUntrustedTextWrapped` | Third-party text goes through `xml_wrap_untrusted` | No |
 
 #### Evaluator cops (8)
 
